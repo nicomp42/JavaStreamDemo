@@ -54,12 +54,24 @@ public class StreamDemo {
         .filter(vehicle -> vehicle.getTopSpeed() >= 100)  
         .forEach(vehicle -> System.out.println(vehicle.toString()));
 		
+		demoWords();
+		
 	}
-	publc static void demoWords() {
+	/**
+	 * Demonstrate how to process words with streams
+	 */
+	public static void demoWords() {
 		ArrayList<String> words = readDemoWordFile();
+		System.out.println("demoWords(); " + words.size() + " words read.");
+		long longWords= words.stream().filter(word -> word.length() > 10).count();
+		System.out.println(longWords + " words are over 10 characters");
 		
 		
 	}
+	/**
+	 * Read the word list from a text file
+	 * @return The list of words
+	 */
 	public static ArrayList<String> readDemoWordFile() {
 		ArrayList<String> words = new ArrayList<String>();
 		try {
