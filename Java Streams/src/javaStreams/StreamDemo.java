@@ -4,6 +4,9 @@
  */
 package javaStreams;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -51,7 +54,24 @@ public class StreamDemo {
         .filter(vehicle -> vehicle.getTopSpeed() >= 100)  
         .forEach(vehicle -> System.out.println(vehicle.toString()));
 		
+	}
+	publc static void demoWords() {
+		ArrayList<String> words = readDemoWordFile();
 		
 		
+	}
+	public static ArrayList<String> readDemoWordFile() {
+		ArrayList<String> words = new ArrayList<String>();
+		try {
+		FileReader fr = new FileReader("Data\\jumbled english FILTERED.ALL.txt");
+		BufferedReader br = new BufferedReader(fr);
+		String word;
+		while ((word = br.readLine()) != null) {
+			words.add(word);
+		}
+		} catch (Exception ex) {
+			System.err.print(ex.getLocalizedMessage());
+		}
+		return words;
 	}
 }
