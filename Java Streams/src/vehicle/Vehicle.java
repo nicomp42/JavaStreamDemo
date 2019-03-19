@@ -1,5 +1,13 @@
+/*
+ * Bill Nicholson
+ * nicholdw@ucmail.uc.edu
+ */
 package vehicle;
-
+/**
+ * Models nothing in the real world, just a demo tool for stream rork
+ * @author nicomp
+ *
+ */
 public class Vehicle {
 	private int topSpeed;
 	private String make;
