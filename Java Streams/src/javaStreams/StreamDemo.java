@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -61,21 +62,32 @@ public class StreamDemo {
 	 * Demonstrate how to process words with streams
 	 */
 	public static void demoWords() {
-		ArrayList<String> words = readDemoWordFile();
-		System.out.println("demoWords(); " + words.size() + " words read.");
+		ArrayList<String> words = readDemoWordFile("Data\\jumbled english FILTERED.ALL.txt");
+		System.out.println("demoWords(): " + words.size() + " words read.");
 		long longWords= words.stream().filter(word -> word.length() > 10).count();
-		System.out.println(longWords + " words are over 10 characters");
+		System.out.println("demoWords(): " + longWords + " words are over 10 characters");
+		
+		long wordsWithsecondLetter = words.stream().filter(word -> word.substring(1,2).equals("e")).count();
+		System.out.println("demoWords(): " + wordsWithsecondLetter + " words have e as the second letter");
+		
+		ArrayList<String> wordsWithSecondLetterE = (ArrayList<String>) words.stream().filter(word -> word.substring(1,2).equals("e")).collect(Collectors.toList());
+		Collections.sort(wordsWithSecondLetterE);
+		System.out.println("The first word with e as the second letter = " + wordsWithSecondLetterE.get(0));
+		
+		System.out.println("All the words containing 'fishy' are " );
+		words.stream().filter(word -> word.contains("fishy")).forEach(word -> System.out.println(word));
 		
 		
 	}
 	/**
 	 * Read the word list from a text file
+	 * @param wordsFile the file of words to be processed
 	 * @return The list of words
 	 */
-	public static ArrayList<String> readDemoWordFile() {
+	public static ArrayList<String> readDemoWordFile(String wordsFile) {
 		ArrayList<String> words = new ArrayList<String>();
 		try {
-		FileReader fr = new FileReader("Data\\jumbled english FILTERED.ALL.txt");
+		FileReader fr = new FileReader(wordsFile);
 		BufferedReader br = new BufferedReader(fr);
 		String word;
 		while ((word = br.readLine()) != null) {
