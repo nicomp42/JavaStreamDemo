@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -33,6 +34,7 @@ public class StreamDemo {
 		demonstrate();
 	}
 	public static void demonstrate() {
+		System.out.println(MethodHandles.lookup().lookupClass() + "...");
 		List<String> states = Arrays.asList("Ohio", "Indiana", "Michigan", "Illinois", "Montana","Idaho", "Alaska",
 				                             "Florida", "South Carolina", "North Carolina", "Washington", "California", "Oregon",
 				                             "Vermont", "Maine", "Rhode Island", "Georgia", "Kentucky");
@@ -123,10 +125,13 @@ public class StreamDemo {
 	}
 	/**
 	 * Use the HTMLUnit project to scrape a web page
-	 * This works but it spits out a lotta CSS parsing errors.
+	 * This works but it spits out a lotta CSS parsing errors unless you turn off logging
 	 * https://www.baeldung.com/htmlunit
 	 */
 	public static void HTMLUnitDemo() {
+		// Supress all the warnings
+		java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF); 
+		
 		try (final WebClient webClient = new WebClient()) {
 	        final HtmlPage page = webClient.getPage("http://htmlunit.sourceforge.net");
 	        System.out.println(page.getTitleText());
