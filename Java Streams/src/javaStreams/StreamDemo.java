@@ -6,6 +6,7 @@ package javaStreams;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.lang.invoke.MethodHandles;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -15,6 +16,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 import vehicle.Vehicle;
 
@@ -58,6 +62,8 @@ public class StreamDemo {
         .forEach(vehicle -> System.out.println(vehicle.toString()));
 		
 		demoWords();
+		
+		HTMLUnitDemo();
 		
 	}
 	/**
@@ -114,5 +120,23 @@ public class StreamDemo {
 			System.err.print("readDemoWordFileUsingCoolStuff(): " + ex.getLocalizedMessage());
 		}
 		return words;
+	}
+	/**
+	 * Use the HTMLUnit project to scrape a web page
+	 * This works but it spits out a lotta CSS parsing errors.
+	 * https://www.baeldung.com/htmlunit
+	 */
+	public static void HTMLUnitDemo() {
+		try (final WebClient webClient = new WebClient()) {
+	        final HtmlPage page = webClient.getPage("http://htmlunit.sourceforge.net");
+	        System.out.println(page.getTitleText());
+	        final String pageAsXml = page.asXml();
+	        //Assert.assertTrue(pageAsXml.contains("<body class=\"composite\">"));
+
+	        final String pageAsText = page.asText();
+	        //Assert.assertTrue(pageAsText.contains("Support for the HTTP and HTTPS protocols"));
+	    } catch (Exception ex) {
+	    	System.err.println( MethodHandles.lookup().lookupClass());
+	    }
 	}
 }
