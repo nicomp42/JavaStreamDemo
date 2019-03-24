@@ -4,7 +4,7 @@
  */
 package vehicle;
 /**
- * Models nothing in the real world, just a demo tool for stream rork
+ * Models nothing in the real world, just a demo tool for stream work
  * @author nicomp
  *
  */
@@ -12,10 +12,19 @@ public class Vehicle {
 	private int topSpeed;
 	private String make;
 	private String model;
-	public Vehicle(String make, String model, int topSpeed) {
+	public enum Condition {NEW, USED, WRECKED, REPAIRED, RESTORED};
+	private Condition condition;
+	public Vehicle(Condition condition, String make, String model, int topSpeed) {
 		this.setMake(make);
 		this.setModel(model);
 		this.setTopSpeed(topSpeed);
+	}
+	public void setCondition(Vehicle.Condition condition) throws Exception {
+		if (condition == Vehicle.Condition.NEW) {
+			throw new Exception ("Can't change a vehicle condition to new");
+		} else {
+			this.condition = condition;
+		}
 	}
 	public int getTopSpeed() {
 		return topSpeed;

@@ -48,14 +48,14 @@ public class StreamDemo {
 		System.out.println(mySet);
 		
 		// Some Vehicle objects
-		List<Vehicle> vehicles = Arrays.asList(new Vehicle("Chevrolet",  "Corvette", 200),
-				                               new Vehicle("Chevrolet",  "Camaro",    150),
-				                               new Vehicle("Chevrolet",  "Chevette",   70),
-				                               new Vehicle("Buick",      "Regal",     100),
-				                               new Vehicle("Chevrolet",  "Corvair",   120),
-				                               new Vehicle("Ford",       "Festiva",    90),
-				                               new Vehicle("Ford",       "Explorer",  100),
-				                               new Vehicle("Pontiac",    "T-1000",     70)
+		List<Vehicle> vehicles = Arrays.asList(new Vehicle(Vehicle.Condition.NEW, "Chevrolet",  "Corvette",  200),
+				                               new Vehicle(Vehicle.Condition.NEW, "Chevrolet",  "Camaro",    150),
+				                               new Vehicle(Vehicle.Condition.NEW, "Chevrolet",  "Chevette",   70),
+				                               new Vehicle(Vehicle.Condition.NEW, "Buick",      "Regal",     100),
+				                               new Vehicle(Vehicle.Condition.NEW, "Chevrolet",  "Corvair",   120),
+				                               new Vehicle(Vehicle.Condition.NEW, "Ford",       "Festiva",    90),
+				                               new Vehicle(Vehicle.Condition.NEW, "Ford",       "Explorer",  100),
+				                               new Vehicle(Vehicle.Condition.NEW, "Pontiac",    "T-1000",     70)
 				                              );
 		
 		// Print all vehicles with top speed >= 100
