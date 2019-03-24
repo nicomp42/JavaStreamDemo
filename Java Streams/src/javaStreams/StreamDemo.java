@@ -16,8 +16,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -37,16 +35,20 @@ public class StreamDemo {
 		System.out.println(MethodHandles.lookup().lookupClass() + "...");
 		List<String> states = Arrays.asList("Ohio", "Indiana", "Michigan", "Illinois", "Montana","Idaho", "Alaska",
 				                             "Florida", "South Carolina", "North Carolina", "Washington", "California", "Oregon",
-				                             "Vermont", "Maine", "Rhode Island", "Georgia", "Kentucky");
-		
+				                             "Vermont", "Maine", "Rhode Island", "Georgia", "Kentucky", "North Dakota", "South Dakota", "Iowa", "New York", "Alabama", "Florida");
+
 		// Get list of states starting with O
 		List<String> os = states.stream().filter(string -> string.startsWith("O")).collect(Collectors.toList());	
-		System.out.println(os.toString());
+		System.out.println("States that begin with 'O': " + os.toString());
 		
 		// Demonstrate a mapping transformation
 		Set<String> mySet = states.stream().map(s -> s + " " + s).collect(Collectors.toSet());
-		System.out.println(mySet);
+		System.out.println("States with mapping transormation: " + mySet);
 		
+		// Remove duplicates
+	    List<String> statesWithoutDuplicates = states.stream().distinct().collect(Collectors.toList());
+	    System.out.println("States with dups removed: " + statesWithoutDuplicates.toString());
+	    
 		// Some Vehicle objects
 		List<Vehicle> vehicles = Arrays.asList(new Vehicle(Vehicle.Condition.NEW, "Chevrolet",  "Corvette",  200),
 				                               new Vehicle(Vehicle.Condition.NEW, "Chevrolet",  "Camaro",    150),
@@ -62,11 +64,10 @@ public class StreamDemo {
 		vehicles.stream()  
         .filter(vehicle -> vehicle.getTopSpeed() >= 100)  
         .forEach(vehicle -> System.out.println(vehicle.toString()));
-		
+
 		demoWords();
-		
+
 		HTMLUnitDemo();
-		
 	}
 	/**
 	 * Demonstrate how to process words with streams
@@ -86,9 +87,7 @@ public class StreamDemo {
 		System.out.println("The first word with e as the second letter = " + wordsWithSecondLetterE.get(0));
 		
 		System.out.println("All the words containing 'fishy' are " );
-		words.stream().filter(word -> word.contains("fishy")).forEach(word -> System.out.println(word));
-		
-		
+		words.stream().filter(word -> word.contains("fishy")).forEach(word -> System.out.println(word));	
 	}
 	/**
 	 * Read the word list from a text file
