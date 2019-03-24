@@ -18,7 +18,7 @@ public class Vehicle {
 		this.setMake(make);
 		this.setModel(model);
 		this.setTopSpeed(topSpeed);
-		this.condition = condition;
+		this.condition = condition;	
 	}
 	/**
 	 * Define the condition of the Vehicle
