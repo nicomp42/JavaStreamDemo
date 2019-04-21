@@ -12,6 +12,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
@@ -66,8 +67,8 @@ public class StreamDemo {
         .forEach(vehicle -> System.out.println(vehicle.toString()));
 
 		demoWords();
-
 		HTMLUnitDemo();
+		demoMath();
 	}
 	/**
 	 * Demonstrate how to process words with streams
@@ -103,6 +104,7 @@ public class StreamDemo {
 			while ((word = br.readLine()) != null) {
 				words.add(word);
 			}
+			br.close();
 		} catch (Exception ex) {
 			System.err.print("readDemoWordFile(): " + ex.getLocalizedMessage());
 		}
@@ -128,7 +130,7 @@ public class StreamDemo {
 	 * https://www.baeldung.com/htmlunit
 	 */
 	public static void HTMLUnitDemo() {
-		// Supress all the warnings
+		// Suppress all the warnings
 		java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF); 
 		
 		try (final WebClient webClient = new WebClient()) {
@@ -143,4 +145,17 @@ public class StreamDemo {
 	    	System.err.println( MethodHandles.lookup().lookupClass());
 	    }
 	}
+	/***
+	 * Demonstrate some math with streams
+	 */
+	public static void demoMath() { 
+        List<Integer> numbers = Arrays.asList(100, -200, 300, -400, -1); 
+        Integer max = numbers.stream().max(Integer::compare).get(); 
+        Integer min = numbers.stream().min(Integer::compare).get(); 
+        IntSummaryStatistics stats = numbers.stream().mapToInt((x) -> x).summaryStatistics();
+        
+        System.out.println("Maximum value : " + max); 	
+        System.out.println("Minumum value : " + min); 	
+        System.out.println("Average value : " + stats.getAverage()); 	
+    }
 }
